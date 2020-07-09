@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.blossom.mapper.BlossomUserMapper">
+
+<!-- <resultMap id="loginDto" type="com.blossom.dto.BlossomDto">
+	<id property="email" column="email"/>
+	<result property="password" column="password"/>
+	<result property="name" column="name"/>
+	<result property="birth" column="birth"/>
+	<result property="gender" column="gender"/>
+	<result property="phone" column="phone"/>
+	<result property="addr1" column="addr1"/>
+	<result property="addr2" column="addr2"/>
+	<result property="addr3" column="addr3"/>
+	<result property="regDate" column="regDate"/>
+	<result property="grade" column="grade"/>
+</resultMap> -->
+	<!-- 회원가입 -->
+	<insert id="insert">
+		insert into user_info (email, password, name, birth, gender, phone, addr1, addr2, addr3)
+		values(#{email}, #{password}, #{name}, #{birth}, #{gender}, #{phone}, #{addr1}, #{addr2}, #{addr3})
+	</insert>
+
+	<!-- 중복체크 -->
+	<select id="checkEmail" resultType="com.blossom.dto.BlossomDto">
+		select
+			email
+		from 
+			user_info 
+		where email = #{email}
+	</select>	
+
+	<!-- 로그인 -->
+	<select id="login" resultType="com.blossom.dto.BlossomDto">
+		select 
+			email, password, name, birth, gender, phone, addr1, addr2, addr3, regDate, grade
+		from 
+			user_info 
+		where email = #{email}
+	</select>	
+
+
+</mapper>

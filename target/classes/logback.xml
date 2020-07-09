@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- Appenders : 로그 출력방향/형태 지정 -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} %5level %logger{36} - %msg%n</pattern>
+		</layout>
+	</appender>
+	
+	<!-- 로그를 파일에 기록하기 -->
+	<property name="LOG_ABSOLUTE_PATH" value="d:/log"/>
+	<appender name="rolling" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_ABSOLUTE_PATH}/logback.log</file>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} %5level %logger{36} - %msg%n</pattern>		
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_ABSOLUTE_PATH}/logback.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy 
+							class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+	</appender>
+	
+	<!-- Application Loggers -->
+	<logger name="com.blossom.controller" level="info"/>
+	<logger name="com.blossom.service" level="info"/>
+		
+	<!-- 3rdparty Loggers -->
+	<logger name="org.springframework.core" level="info"/> 
+	<logger name="org.springframework.beans" level="info"/>
+	<logger name="org.springframework.context" level="info"/>
+	<logger name="org.springframework.web" level="info"/>
+	<logger name="com.blossom.mapper.BlossomUserMapper" level="debug"/>
+	<!-- <logger name="com.blossom.mapper.BoardAttachMapper" level="debug"/> -->
+	
+	<!-- Root Logger -->
+	<root level="warn">
+		<appender-ref ref="console" />
+		<appender-ref ref="rolling" />
+	</root>
+</configuration>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+.form-group{
+	width: 400px;
+	height: 70px;
+	margin:0 auto;
+	margin-top: 18px;
+}
+.join {
+	font-size : 30px;
+}
+.joinbtn{
+  background: #333333;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:35px;
+  font-size:1.2em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+.joinbtn:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+.joinbtn:before,.joinbtn:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+.joinbtn:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.joinbtn:hover:before,.joinbtn:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}

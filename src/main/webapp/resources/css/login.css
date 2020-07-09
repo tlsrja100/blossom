@@ -1,0 +1,75 @@
+@charset "UTF-8";
+.modal {
+	text-align: center;
+}
+
+.modal-content {
+	height: auto;
+	min-height: 60%;
+}
+
+.modal-dialog {
+	max-width: 100%;
+	width: auto;
+	max-height: 100%;
+	height: auto;
+	display: table;
+}
+
+.input.from-control {
+	text-align: center;
+}
+.input-group {
+	margin-left:30px; 
+	padding-top:10px;
+}
+.input-group-addon {
+	background-color:#fff;
+}
+
+.form-group.bu {
+	width: 200px;
+	height: 50px;
+	margin: 0 auto;
+}
+
+.btn.btn-sm {
+	padding: .5rem 1.4rem;
+	font-size: smaller;
+}
+
+button.animated-button.thar-two {
+	color: #000;
+	cursor: pointer;
+	display: block;
+	position: relative;
+	border: 2px solid #F7CA18;
+	background: #fff;
+	transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+}
+
+button.animated-button.thar-two:hover {
+	color: #000 !important;
+	background-color: transparent;
+	text-shadow: ntwo;
+}
+
+button.animated-button.thar-two:hover:before {
+	top: 0%;
+	bottom: auto;
+	height: 100%;
+}
+
+button.animated-button.thar-two:before {
+	display: block;
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	height: 0px;
+	width: 100%;
+	z-index: -1;
+	content: '';
+	color: #000 !important;
+	background: #F7CA18;
+	transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+}
