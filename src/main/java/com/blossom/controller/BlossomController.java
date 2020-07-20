@@ -86,7 +86,6 @@ public class BlossomController {
 	}
 	
 	
-	
 	@ResponseBody
 	@PostMapping("/checkEmail")
 	public String checkEmail(String email) {
@@ -101,4 +100,8 @@ public class BlossomController {
 	}
 	
 
+	@GetMapping("/loadmap")
+	public void getloadMap() {
+		log.info("loadmap");
+	}
 }

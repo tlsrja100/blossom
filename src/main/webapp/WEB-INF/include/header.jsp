@@ -65,7 +65,7 @@
 </style>
 <body>
 <nav class="header">
-<c:if test="${login == null}">
+<c:if test="${empty login}">
 	<ul>
 		<li>
 			<%@include file="../views//blossom/login.jsp" %>
@@ -77,20 +77,20 @@
 	</ul>
 	<ul>
 		<li>
-			<button type="button" class="buttonstyle" onclick="location.href='joinpage'">
+			<button type="button" class="buttonstyle" onclick="location.href='/blossom/joinpage'">
 				<div class="a">JOIN</div>
 			</button>
 		</li>
 	</ul>
 	<ul>
 		<li>
-			<button type="button" class="buttonstyle">
+			<button type="button" class="buttonstyle" onclick="location.href='/board/boardMain'">
 				<div class="a">CUSTOMER CENTER</div>
 			</button>
 		</li>
 	</ul>
 </c:if>
-<c:if test="${login != null}">
+<c:if test="${!empty login}">
 	<ul>
 		<li>
 			<button type="button" class="buttonstyle" onclick="logout()">
@@ -100,7 +100,7 @@
 	</ul>
 	<ul>
 		<li>
-			<button type="button" class="buttonstyle">
+			<button type="button" class="buttonstyle" onclick="location.href='/board/boardMain'">
 				<div class="a">CUSTOMER CENTER</div>
 			</button>
 		</li>
@@ -123,8 +123,8 @@
 		<a href="" class="manu">블라썸독</a>
 		<a href="/board/boardMain" class="manu">공지사항</a>
 		<a href="" class="manu">미용사소개</a>
-		<a href="" class="manu">미용후기</a>
-		<a href="" class="manu">오시는길</a>
+		<a href="/review/reviewMain" class="manu">미용후기</a>
+		<a href="/blossom/loadmap" class="manu">오시는길</a>
 	</div>
 </body>
 <script>

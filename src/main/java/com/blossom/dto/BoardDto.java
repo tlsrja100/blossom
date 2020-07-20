@@ -1,6 +1,5 @@
 package com.blossom.dto;
 
-import java.util.Date;
 
 public class BoardDto {
 
@@ -8,7 +7,7 @@ public class BoardDto {
 	private String title;
 	private String writer;
 	private String content;
-	private Date regdate;
+	private String regdate;
 	
 	
 	public int getNum() {
@@ -35,11 +34,11 @@ public class BoardDto {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getRegdate() {
+	public String getRegdate() {
 		return regdate;
 	}
-	public void setRegdate(Date regdate) {
-		this.regdate = regdate;
+	public String setRegdate(String regdate) {
+		return this.regdate = regdate;
 	}
 	
 	@Override

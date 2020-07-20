@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.blossom.mapper.ReviewMapper">
+ 
+ 	<insert id="reviewInsert">
+ 		insert into blossom_review (title, writer, content, regdate, uuid, uploadpath, filename, filetype)
+ 			values (blossom_review_seq.nextval, #{title}, #{writer}, #{contemt}, sysdate, #{uuid}, #{uploadPath}, #{fileName}, #{fileType})
+ 	</insert>
+ 
+ 
+ </mapper>

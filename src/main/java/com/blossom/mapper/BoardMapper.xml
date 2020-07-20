@@ -6,18 +6,65 @@
 <mapper namespace="com.blossom.mapper.BoardMapper">
 
 	<!-- 글 작성 -->
-	<insert id="insert">
+	<insert id="insertboard">
 		insert into blossom_board (
-			num, title, writer, content
+			num, title, writer, content, regdate
 		) values (
-			blossom_board_seq.nextval, #{title}, #{writer}, #{content}
+			blossom_board_seq.nextval, #{title}, #{writer}, #{content}, sysdate
 		)
 	</insert>
 	
 	<!-- 글 목록 -->
 	<select id="boardList" resultType="com.blossom.dto.BoardDto">
-		select num, title, writer, content, to_char(regdate,'YYYY/MM/DD'),regdate
-			from blossom_board
-				order by num desc
+		select * from (
+			select rownum as rn, a.* from (
+				select  rownum, num, title, writer, content, to_char(regdate,'YYYY/MM/DD') regdate
+					from blossom_board
+					<include refid="search"></include>
+					order by num desc
+			) a
+		) where rn between #{start} and #{end}
 	</select>
+	
+	<!-- 글 조회 -->
+	<select id="boardDetail" resultType="com.blossom.dto.BoardDto">
+		select num, title, writer, content, to_char(regdate, 'YYYY/MM/DD') regdate
+		from blossom_board
+		where num = #{num}
+	</select>
+	
+	<!-- 글 수정 -->
+	<update id="boardModify" parameterType="com.blossom.dto.BoardDto">
+		update blossom_board
+		set 
+			title = #{title},
+			content = #{content}
+		where num = #{num}
+	</update>
+	
+	<!-- 글 삭제 -->
+	<delete id="boardDelete">
+		delete blossom_board
+			where num = #{num}
+	</delete>
+	
+	<!-- 전체 글 조회 -->
+	<select id="count" resultType="int">
+		select count(*) from blossom_board
+		<include refid="search"></include>
+	</select>
+	
+	<!-- 검색 조건 sql -->
+	<sql id="search">
+		<choose>
+			<!-- 검색 옵션이 전체 검색일 경우 -->
+			<when test="searchOption == 'all'">
+				where title like '%'||#{keyword}||'%'
+				or content like '%'||#{keyword}||'%'
+			</when>
+			<otherwise>
+				where ${searchOption} like '%'||#{keyword}||'%'
+			</otherwise>
+		</choose>
+	</sql>
 </mapper>
