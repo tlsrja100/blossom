@@ -5,7 +5,6 @@
 <head>
 <%@include file="../../include/header.jsp" %>
 <link rel="stylesheet" href="/resources/css/join.css">
-<!-- <link rel="stylesheet" href="/resources/css/login.css" /> -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 <script src="/resources/js/joinform.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>

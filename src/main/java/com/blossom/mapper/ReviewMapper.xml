@@ -4,11 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="com.blossom.mapper.ReviewMapper">
- 
+ 	
  	<insert id="reviewInsert">
- 		insert into blossom_review (title, writer, content, regdate, uuid, uploadpath, filename, filetype)
- 			values (blossom_review_seq.nextval, #{title}, #{writer}, #{contemt}, sysdate, #{uuid}, #{uploadPath}, #{fileName}, #{fileType})
+ 		<selectKey keyProperty="num" order="BEFORE" resultType="int">
+ 		select blossom_review_seq.nextVal from dual
+ 		</selectKey>
+ 		insert into blossom_review (num, title, writer, content, regdate)
+ 			values (#{num}, #{title}, #{writer}, #{content}, sysdate)
  	</insert>
  
+ 	<!-- <insert id="reviewInsert">
+ 		insert into blossom_review (num, title, writer, content, regdate, uuid, uploadPath, fileName, fileType)
+ 		values (blossom_review_seq.nextval, #{title}, #{writer}, #{content}, sysdate, #{uuid}, #{uploadPath}, #{fileName}, #{fileType})
+ 	</insert> -->
  
  </mapper>

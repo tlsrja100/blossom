@@ -19,7 +19,9 @@
 		</mvc:interceptor>
 	</mvc:interceptors>  -->
 	
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="10485760"/>
+	</bean>	
 	
 	<mvc:annotation-driven></mvc:annotation-driven>
 	<mvc:resources mapping="/resources/**" location="/resources/" />

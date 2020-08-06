@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap"rel="stylesheet">
