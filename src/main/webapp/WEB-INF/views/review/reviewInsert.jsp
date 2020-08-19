@@ -8,6 +8,9 @@
 <title>Insert title here</title>
 </head>
 <script src="/resources/js/review_file_upload.js"></script>
+<!-- <script src="/resources/js/summernote/lang/summernote-ko-KR.js"></script>
+<script src="/resources/js/summernote/summernote-lite.js"></script>
+<link rel="stylesheet" href="/resources/css/summernote/summernote-lite.css"> -->
 <style>
 .container{
  padding-top: 70px;
@@ -16,7 +19,6 @@
 .mb-3 {
 	padding-top : 20px;
 }
-
 
 .fileDrop {
 	width: 77%;
@@ -36,7 +38,7 @@
 <body>
 <article>
 	<div class="container">
-		<form id="reviewForm" action="/review/reviewInsert" method="post"  enctype="multipart/form-data" role="form" > <!-- action="/review/reviewInsert" method="post" -->
+		<form id="reviewForm" action="/review/reviewInsert" method="post" role="form" enctype="multipart/form-data"  > <!-- action="/review/reviewInsert" method="post" -->
 			<div class="mb-3">	
 				<label for="title">제목</label>
 				<input type="text" class="form-control" name="title" id="title" placeholder="제목을 입력해주세요."/>
@@ -46,8 +48,9 @@
 				<input type="text" class="form-control" name="writer" id="writer" readonly value="${login.name}" /><!-- value="${login.name}"; -->
 			</div>
 			<div class="mb-3">
-				<label for="content">글내용</label>
+				<label for="content">글내용</label> 
 				<textarea class="form-control" rows="4" name="content" id="content" placeholder="내용을 입력해주세요." ></textarea>
+				<!-- <textarea id="summernote" name="content"></textarea> -->
 			</div>
 			<!-- 이미지 업로드 구간 시작 -->
 			<div>
@@ -55,7 +58,7 @@
 				<div class="fileDrop" >
 				</div>
 				<div style="width:20%;float:right">
-					<input type="file" name="uploadFile" multiple="multiple"/>
+					<input type="file" name="uploadFile" />
 					<br />
 					<button type="button" class="btn btn-primary btn-clock" style="width:76px;" id="uploadImg">사진등록</button>
 				</div>
@@ -65,4 +68,35 @@
 	</div>
 </article>
 </body>
+<!-- <script>
+$(document).ready(function() {
+	  $('#summernote').summernote({
+		  	height: 300,
+ 	    	placeholder: "content",
+	        minHeight: null,
+	        maxHeight: null,
+	        focus: true, 
+	        lang : "ko-KR",
+	        /* callbacks: {
+				onImageUpload: function(files, editor, welEditable) {
+		        	sendFile(files[0],editor,welEditable);
+		        }
+			} */
+	  });
+});
+	  function sendFile(file, editor, welEditable) {
+		  var data = new FormData();
+		  data.append("file",file);
+		  $.ajax({
+			  data : data,
+			  type : "post",
+			  url : "/uploadSummernoteImageFile",
+			  contentType : false,
+			  processData : false,
+			  success : function(data) {
+				  $(editor).summernote('editor.insertImage', data.url);
+			  }
+		  })
+	  }
+</script> -->
 </html>

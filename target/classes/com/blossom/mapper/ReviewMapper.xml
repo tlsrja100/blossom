@@ -12,10 +12,28 @@
  		insert into blossom_review (num, title, writer, content, regdate)
  			values (#{num}, #{title}, #{writer}, #{content}, sysdate)
  	</insert>
- 
+ 	
+ 	
+ 	<!-- <insert id="reviewInsert">
+ 		insert into blossom_review (num, title, writer, content, regdate, uuid, uploadPath, fileName, fileType)
+ 		values (blossom_review_seq.nextval, #{title}, #{writer}, #{content}, sysdate, #{uuid}, #{uploadPath}, #{fileName}, #{fileType})
+ 	</insert>
+  -->
  	<!-- <insert id="reviewInsert">
  		insert into blossom_review (num, title, writer, content, regdate, uuid, uploadPath, fileName, fileType)
  		values (blossom_review_seq.nextval, #{title}, #{writer}, #{content}, sysdate, #{uuid}, #{uploadPath}, #{fileName}, #{fileType})
  	</insert> -->
  
+ 
+ 	<!-- <insert id="reviewInsert">
+ 		<![CDATA[
+		INSERT ALL
+			INTO BLOSSOM_REVIEW (num, title, writer, content, regdate)
+				VALUES (#{num}, #{title}, #{writer}, #{content}, SYSDATE)
+			INTO REVIEW_FILE (uuid, uploadPath, fileName, num)
+				VALUES (#{uuid}, #{uploadPath}, #{fileName}, #{num})
+			SELECT * FROM BLOSSOM_REVIEW, REVIEW_FILE
+ 			WHERE NUM = #{NUM}
+ 		]]>
+ 	</insert> -->
  </mapper>

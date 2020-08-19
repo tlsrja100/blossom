@@ -39,11 +39,18 @@ public class ReviewController {
 	@PostMapping("/reviewInsert")
 	public String postInsert(ReviewDto dto) {
 		log.info("post reviewInsert..");
+		/*
+		 * if(dto.getAttachList() != null) { for (ReviewFileDto attach :
+		 * dto.getAttachList()) { log.info("attach " + attach); } }
+		 */
 		
-		service.reviewInsert(dto);
+		if (dto.getAttachList() != null) {
+			for (ReviewFileDto attach : dto.getAttachList()) {
+				log.info("attach" + attach);
+				service.reviewInsert(dto);
+			}
+		}
 
 		return "redirect:reviewMain";
 	}
-	 
-	
 }

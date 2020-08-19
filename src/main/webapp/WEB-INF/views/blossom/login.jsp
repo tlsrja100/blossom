@@ -10,13 +10,21 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
 <link rel="stylesheet" href="/resources/css/login.css" />
 <meta charset="UTF-8">
+<%
+	String msg = (String)request.getAttribute("msg");
+	if(msg == null) {
+		msg = "true";
+	} else {
+		%>
+		<script>
+			alert("아이디 또는 비밀번호를 잘못 입력하셨습니다.");
+		</script>
+		<%
+	}
+%>
 <title>Insert title here</title>
 </head>
 <body>
-<script>
-	/* alert("이메일과 비밀번호를 확인해 주세요");
-	self.location = "/blossom"; */
-</script>
 <!-- modal -->
 <div class="modal fade" id="myModal" tabindex="1"role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document" >
@@ -53,20 +61,24 @@
 						</span>
 						<input type="password" class="form-control" style="height:34.4px;" placeholder="Password" id="password" name="password"/>
 					</div>
-					<c:if test="${msg == false }">
-						<p style="color:#f00;">로그인에 실패했습니다.</p>
-					</c:if>
 					<br />
 					<div class="form-group bu" style="padding-top:10px;" ><!-- "col-md-3 col-sm-3 col-xs-6"  --> 
 							<button type="button" class="btn btn-sm animated-button thar-two" style="width:100px; height:30px; margin-left:45px;text-align:center;" onclick="loginbtn()">Login</button> 
 					</div>
 				</form>
+				<c:if test="${mm == false }">
+				<script>
+					alert("a");
+				</script>
+						<!-- <p style="color:#f00;">로그인에 실패했습니다.</p> -->
+				</c:if>
 			</div>
 		</div>
 	</div>
 </div>	
 </body>
 <script>
+var result = "${message}";
 function loginbtn() {
 	var email = $("#email-login").val();
 	var password = $("#password").val();
@@ -90,9 +102,10 @@ function loginbtn() {
 				console.log(login);
 				location.href = "/blossom/mainpage";
 			},
-			error : function(data){
+			error : function(request,status,error){
 				location.href = "/blossom/mainpage";
 				alert("이메일 또는 패스워드를 확인해주세요.");
+				
 			}
 		})
 	} 

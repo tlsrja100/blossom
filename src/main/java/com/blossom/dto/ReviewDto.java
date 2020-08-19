@@ -12,7 +12,6 @@ public class ReviewDto {
 	
 	// 파일 첨부 목록
 
-	
 	private List<ReviewFileDto> attachList;
 
 	public int getNum() {
@@ -67,11 +66,8 @@ public class ReviewDto {
 	public String toString() {
 		return "ReviewDto [num=" + num + ", title=" + title + ", writer=" + writer + ", content=" + content
 				+ ", regdate=" + regdate + ", attachList=" + attachList + "]";
-	}
+	} 
+
 	
-	
-	
-	
-	
-	
+
 }

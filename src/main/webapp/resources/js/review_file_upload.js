@@ -6,15 +6,17 @@ $(function(){
 		// 첨부파일내용 : uuid, uploadPath, fileType, fileName
 	     //=> fileDrop ul li가 가지고 있기 때문에 그 영역에 있는 값 수집하기
 		var str = "";
-		$(".fileDrop").each(function(i){
-			var job = $(".fileDrop div");
-			str+="<input type='hidden' name='reviewDto["+i+"].uuid' value='"+job.data("uuid")+"'>";
-	        str+="<input type='hidden' name='reviewDto["+i+"].uploadPath' value='"+job.data("path")+"'>";
-	        str+="<input type='hidden' name='reviewDto["+i+"].fileName' value='"+job.data("filename")+"'>";
-	        str+="<input type='hidden' name='reviewDto["+i+"].fileType' value='"+job.data("type")+"'>";
+		$(".fileDrop").each(function(i,obj){
+			var job = $(obj);
+			str+="<input type='hidden' name='ReviewDto["+i+"].uuid' value='"+job.data("uuid")+"'>";
+	        str+="<input type='hidden' name='ReviewDto["+i+"].uploadPath' value='"+job.data("path")+"'>";
+	        str+="<input type='hidden' name='ReviewDto["+i+"].fileName' value='"+job.data("filename")+"'>";
+	        str+="<input type='hidden' name='ReviewDto["+i+"].fileType' value='"+job.data("type")+"'>";
 		});
 		console.log(str);
-		formObj.append(str).submit();
+		formObj.append(str)
+		formObj.submit();
+		console.log("Obj",obj);
 	});
 	
 	// uploadImg 클릭하면 uploadFile에 있는 정보 가져오기 

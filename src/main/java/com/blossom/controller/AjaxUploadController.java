@@ -35,6 +35,7 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Controller
 @Slf4j
 public class AjaxUploadController {
+	int number = 1;
 	@GetMapping("/uploadAjax")
 	public void uploadAjax() {
 		log.info("uploadAjax 요청");
@@ -42,12 +43,13 @@ public class AjaxUploadController {
 	
 	@PostMapping(value="/uploadAjax",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<List<ReviewFileDto>> uploadAjaxPost(MultipartFile[] uploadFile,ReviewDto dto){
+	public ResponseEntity<List<ReviewFileDto>> uploadAjaxPost(MultipartFile[] uploadFile){
 		log.info("ajax 파일 업로드 요청");
 		String uploadFolder="d:\\upload\\review";
 		//년/월/일 폴더 형태로 가져오기
 		String uploadFolderPath=getFolder();
 		File uploadPath = new File(uploadFolder,uploadFolderPath);
+		boolean bool = true;
 		
 		//폴더가 없으면 새로 생성하기
 		if(!uploadPath.exists()) {
@@ -56,32 +58,54 @@ public class AjaxUploadController {
 		
 		List<ReviewFileDto> attList=new ArrayList<ReviewFileDto>();
 		String uploadFileName="";
+		String uploadFileName2="";
+		
+		
 		
 		for(MultipartFile f:uploadFile) {
+			bool = true;
 			log.info("file Name : "+f.getOriginalFilename());
 			log.info("file Size : "+f.getSize());
 			
 			uploadFileName=f.getOriginalFilename();
+			uploadFileName2=f.getOriginalFilename();
 			
 			//uuid 값 생성 후 파일명과 함게 저장하기
 			UUID uuid=UUID.randomUUID();
 			
+			while(bool) {
+				uploadFileName = number + "_" + uuid.toString() + "_" + uploadFileName;
+
+				/*
+				 * if(number == 4) { bool = false; }
+				 */
+				if (number < 5) {
+					number++;
+				} else if (number == 4) {
+					number = 1;
+				}
+
+				bool = false;
+			}
 		
 			
-			uploadFileName=uuid.toString()+"_"+uploadFileName;
 			File saveFile = new File(uploadPath,uploadFileName);
+			uploadFileName2=uuid.toString()+"_"+uploadFileName2;
 			log.info("upload file name  "+uploadFileName);
 			//현재 파일의 저장경로와 파일명, 이미지 여부, uuid값을 담는 객체 생성
 			ReviewFileDto attach=new ReviewFileDto();
 			attach.setUuid(uuid.toString());
 			attach.setUploadPath(uploadFolderPath);
+			log.info("origin : " + f.getOriginalFilename());
 			attach.setFileName(f.getOriginalFilename());
-			
+			if(saveFile != null) {
+				log.info("save File not null");
+			}
 			if(checkImageType(saveFile)) {
 				attach.setFileType(true);
 				//썸네일 작업하기
 				try {
-					FileOutputStream thumbnail= new FileOutputStream(new File(uploadPath,"s_"+uploadFileName));
+					FileOutputStream thumbnail= new FileOutputStream(new File(uploadPath,"s_"+uploadFileName2));
 					Thumbnailator.createThumbnail(f.getInputStream(),thumbnail,100,100);
 					thumbnail.close();
 				} catch (FileNotFoundException e) {
@@ -99,7 +123,7 @@ public class AjaxUploadController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		}		
+		}	
 		return new ResponseEntity<>(attList,HttpStatus.OK);
 	}
 	

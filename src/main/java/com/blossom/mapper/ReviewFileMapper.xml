@@ -6,7 +6,7 @@
  <mapper namespace="com.blossom.mapper.ReviewFileMapper">
  
  	<insert id="addFile">
-		insert into review_file (uuid, uploadpath, filename, num)
+		insert into review_file (uuid, uploadPath, fileName, num)
 		values (#{uuid}, #{uploadPath}, #{fileName}, #{num})
  	</insert>
  

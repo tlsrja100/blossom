@@ -1,9 +1,5 @@
 package com.blossom.dao;
 
-
-
-
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,6 +11,8 @@ public class BlossomDao {
 
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+	
+
 	
 	// 회원가입
 	public void insert(BlossomDto dto) {
@@ -31,4 +29,8 @@ public class BlossomDao {
 		return sqlSessionTemplate.selectOne("login",dto);
 	}
 	
+	// 패스워드
+	public BlossomDto getPw(String password) {
+		return sqlSessionTemplate.selectOne("password", password);
+	}
 }

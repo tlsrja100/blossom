@@ -36,11 +36,15 @@
 	<!-- 로그인 -->
 	<select id="login" resultType="com.blossom.dto.BlossomDto">
 		select 
-			email, password, name, birth, gender, phone, addr1, addr2, addr3, regDate, grade
+			email, password, name
 		from 
 			user_info 
 		where email = #{email}
 	</select>	
 
-
+	<select id="password" resultType="com.blossom.dto.BlossomDto">
+		select email, password, name
+		from user_info
+		where password = #{password}
+	</select>
 </mapper>

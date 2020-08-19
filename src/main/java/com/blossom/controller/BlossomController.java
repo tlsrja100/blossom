@@ -1,11 +1,12 @@
 package com.blossom.controller;
 
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,8 @@ public class BlossomController {
 	@Autowired
 	private BlossomService service;
 	
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
 	
 	 @GetMapping("/mainpage")
 	 public void main() {
@@ -45,8 +48,11 @@ public class BlossomController {
 	public String postJoinPage(BlossomDto dto) {
 		log.info("회원 가입");
 		// BCrypt.hashpw() 메서드는 첫번째 파라미터에는 암호화할 비밀번호 두번째 파라미터는 BCrypt.getsalt()를 받고 암호화된 비밀번호를 리턴 해준다.
-		String hashedPw = BCrypt.hashpw(dto.getPassword(), BCrypt.gensalt());
-		dto.setPassword(hashedPw);
+		//String hashedPw = BCrypt.hashpw(dto.getPassword(), BCrypt.gensalt());
+		
+		String encPassword = passwordEncoder.encode(dto.getPassword());
+		dto.setPassword(encPassword);
+
 		service.insert(dto);
 		return "redirect:mainpage";
 	}
@@ -61,20 +67,29 @@ public class BlossomController {
 	@PostMapping("/login")
 	public void loginPost(BlossomDto dto, HttpSession session, Model model, HttpServletRequest req, RedirectAttributes rttr) {
 		log.info("login post.");
+		/*
+		 * BlossomDto login = service.login(dto); session = req.getSession();
+		 * 
+		 * if (login == null || !BCrypt.checkpw(dto.getPassword(), login.getPassword()))
+		 * { session.setAttribute("login", null); rttr.addFlashAttribute("message",
+		 * "message"); return; } else { session.setAttribute("login", login); }
+		 */
+		
+		
 		BlossomDto login = service.login(dto);
 		session = req.getSession();
-		
-		if (login == null || !BCrypt.checkpw(dto.getPassword(), login.getPassword())) {
-			session.setAttribute("login", null);
-			rttr.addFlashAttribute("msg",false);
-			return;
-		} else {
+		boolean passMatch = passwordEncoder.matches(dto.getPassword(), login.getPassword());
+
+		if (login != null && passMatch == true) {
 			session.setAttribute("login", login);
+		} else {
+			session.setAttribute("login", null);
+			rttr.addFlashAttribute("msg", false);
+			model.addAttribute("mm", false);
+			return;
 		}
-		//model.addAttribute("user",login); 
-		//return "redirect:/blossom";
-
-
+		 
+	
 	}
 	
 	// 로그아웃
