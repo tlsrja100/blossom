@@ -14,16 +14,10 @@
  	</insert>
  	
  	
- 	<!-- <insert id="reviewInsert">
- 		insert into blossom_review (num, title, writer, content, regdate, uuid, uploadPath, fileName, fileType)
- 		values (blossom_review_seq.nextval, #{title}, #{writer}, #{content}, sysdate, #{uuid}, #{uploadPath}, #{fileName}, #{fileType})
- 	</insert>
-  -->
- 	<!-- <insert id="reviewInsert">
- 		insert into blossom_review (num, title, writer, content, regdate, uuid, uploadPath, fileName, fileType)
- 		values (blossom_review_seq.nextval, #{title}, #{writer}, #{content}, sysdate, #{uuid}, #{uploadPath}, #{fileName}, #{fileType})
- 	</insert> -->
- 
+	<!-- <insert id="reviewInsert">
+		insert into blossom_review (num, title, writer, content, regdate, uuid, uploadpath, filename, filetype)
+		values (blossom_review_seq.nextVal, #{title}, #{writer}, #{content}, sysdate, #{uuid, jdbcType=VARCHAR}, #{uploadPath, jdbcType=VARCHAR}, #{fileName, jdbcType=VARCHAR}, #{fileType})
+	</insert> -->
  
  	<!-- <insert id="reviewInsert">
  		<![CDATA[

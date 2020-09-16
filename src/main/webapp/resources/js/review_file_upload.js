@@ -8,10 +8,10 @@ $(function(){
 		var str = "";
 		$(".fileDrop").each(function(i,obj){
 			var job = $(obj);
-			str+="<input type='hidden' name='ReviewDto["+i+"].uuid' value='"+job.data("uuid")+"'>";
-	        str+="<input type='hidden' name='ReviewDto["+i+"].uploadPath' value='"+job.data("path")+"'>";
-	        str+="<input type='hidden' name='ReviewDto["+i+"].fileName' value='"+job.data("filename")+"'>";
-	        str+="<input type='hidden' name='ReviewDto["+i+"].fileType' value='"+job.data("type")+"'>";
+			str+="<input type='hidden' name='ReviewFileDto["+i+"].uuid' value='"+job.data("uuid")+"'>";
+	        str+="<input type='hidden' name='ReviewFileDto["+i+"].uploadPath' value='"+job.data("path")+"'>";
+	        str+="<input type='hidden' name='ReviewFileDto["+i+"].fileName' value='"+job.data("filename")+"'>";
+	        str+="<input type='hidden' name='ReviewFileDto["+i+"].fileType' value='"+job.data("type")+"'>";
 		});
 		console.log(str);
 		formObj.append(str)
@@ -76,21 +76,20 @@ $(function(){
     	var str="";
     	$(uploadResultArr).each(function(i,obj){
     		if(obj.fileType) {
-    			//썸네일 이미지 경로
-                var filePath=encodeURIComponent(obj.uploadPath+"\\s_"+obj.uuid+"_"+obj.fileName);
                  //원본 파일 이미지 경로
                 var oriPath=obj.uploadPath+"\\"+obj.uuid+"_"+obj.fileName;
-                
                 //폴더 구분의 \를 /로 바꾸는 작업
-                oriPath=oriPath.replace(new RegExp(/\\/g),"/");
+                /*oriPath=oriPath.replace(new RegExp(/\\/g),"/");*/
+                var filePath = encodeURIComponent(obj.uploadPath+"\\s_"+obj.uuid+"_"+obj.fileName);
                 str+="<div id = 'image_span' data-path='"+obj.uploadPath+"' data-uuid='"+obj.uuid+"'";
                 str+=" data-filename='"+obj.fileName+"' data-type='"+obj.fileType+"'>";
                 str+="<img src='/display?fileName="+filePath+"' id ='img_px'>"; // 고정이미지값을 줄려고 id를 넣음
                 str+="<span data-file='"+filePath+"' data-type='image'> X </span></div>";
+              
     		}
     	});
     	var span_length = $(".fileDrop div").length;
-    	console.log("div갯수 : " , span_length);
+    	console.log("span갯수 : " , span_length);
     	
     	if(span_length === 4) {
     		alert("이미지는 4개까지 업로드 가능합니다.");

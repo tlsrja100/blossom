@@ -110,7 +110,7 @@
 	<c:if test="${login.grade == 9}">
 		<ul>
 			<li>
-				<button type="button" class="buttonstyle" id="admin">
+				<button type="button" class="buttonstyle" id="admin" onclick="location.href='/admin/adminpage'">
 					<div class="a">회원정보관리</div>
 				</button>
 			</li>
@@ -139,5 +139,6 @@
 function logout(){
 	location.href = "/blossom/logout";
 }
+
 </script>
 </html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.blossom.mapper.AdminMapper">
+
+	<!-- 회원 목록 -->
+	<select id="MemberList" resultType="com.blossom.dto.BlossomDto">
+		select * from (
+			select rownum as rn, a.* from (
+				select rownum, email, name, birth, phone, addr1, addr2, addr3 
+					from user_info
+					<include refid="search"></include>
+					order by name desc
+			) a
+		) where rn between #{start} and #{end}
+	</select>
+
+
+	<!-- 회원 카운트 -->
+	<select id="MemberCount" resultType="int">
+		select count(*) from user_info
+		<include refid="search"></include>
+	</select>
+
+	<!-- 검색 -->
+	<sql id="search">
+		<choose>
+			<when test="searchOption == 'all'">
+				WHERE name like '%'||#{keyword}||'%'
+				OR email like '%'||#{keyword}||'%'
+			</when>
+			<otherwise>
+				WHERE ${searchOption} like '%'||#{keyword}||'%'
+			</otherwise>
+		</choose>
+	</sql>
+
+</mapper>

@@ -11,36 +11,20 @@ import com.blossom.dao.ReviewFileDao;
 import com.blossom.dto.ReviewDto;
 import com.blossom.dto.ReviewFileDto;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class ReviewService {
 
 	@Autowired
 	private ReviewDao reviewdao;
-	
+
 	@Autowired
 	private ReviewFileDao reviewFiledao;
 
 	
-	
-	
-	/*
-	 * public void reviewInsert(ReviewDto dto) { reviewdao.reviewInsert(dto);
-	 * 
-	 * if(dto.getAttachList() != null) { for(ReviewDto attach : dto.getAttachList())
-	 * { } }
-	 * 
-	 * //파일 첨부 등록
-	 * 
-	 * 
-	 * if (dto.getAttachList() == null || dto.getAttachList().size() <= 0) { return;
-	 * }
-	 * 
-	 * for (ReviewFileDto attach : dto.getAttachList()) {
-	 * attach.setNum(dto.getNum()); reviewFiledao.addFile(attach); }
-	 * 
-	 * }
-	 */
-	 
+
 	
 	/*
 	 * public int reviewInsert(ReviewDto dto) { return reviewdao.reviewInsert(dto);
@@ -57,17 +41,22 @@ public class ReviewService {
 	
 	
 
-	@Transactional 
-	public void reviewInsert(ReviewDto dto) {
+	
+	  @Transactional 
+	  public void reviewInsert(ReviewDto dto) {
 		reviewdao.reviewInsert(dto);
-		/*
-		 * if (dto.getAttachList() == null || dto.getAttachList().size() <= 0) { return;
-		 * }
-		 */
+	  
+		if (dto.getAttachList() == null || dto.getAttachList().size() <= 0) {
+			return;
+		}
+		log.info("attachlist service " + dto.getAttachList());
+
 		for (ReviewFileDto attach : dto.getAttachList()) {
 			attach.setNum(dto.getNum());
 			reviewFiledao.addFile(attach);
 		}
+
 	}
+	 
 
 }

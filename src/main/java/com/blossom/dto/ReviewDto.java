@@ -11,9 +11,17 @@ public class ReviewDto {
 	private String regdate;
 	
 	// 파일 첨부 목록
-
+	/*
+	 * private String uuid; private String uploadPath; private String fileName;
+	 * private boolean fileType;
+	 * 
+	 * private List<ReviewDto> attachList;
+	 */
+	
+	
+	
 	private List<ReviewFileDto> attachList;
-
+	 
 	public int getNum() {
 		return num;
 	}
@@ -66,7 +74,11 @@ public class ReviewDto {
 	public String toString() {
 		return "ReviewDto [num=" + num + ", title=" + title + ", writer=" + writer + ", content=" + content
 				+ ", regdate=" + regdate + ", attachList=" + attachList + "]";
-	} 
+	}
+
+
+
+	
 
 	
 

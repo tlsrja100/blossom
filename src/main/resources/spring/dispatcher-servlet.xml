@@ -34,4 +34,6 @@
 		<property name="prefix" value="/WEB-INF/views/" /> <!-- 컨트롤러에서 jsp 파일 찾을 때 기준이 되는 폴더- -->
 		<property name="suffix" value=".jsp" /> <!--컨트롤러에서 설정한 뷰페이지명 끝에 붙여줌 -->
 	</bean>
+	
+
 </beans>

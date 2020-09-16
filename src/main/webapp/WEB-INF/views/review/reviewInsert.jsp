@@ -58,7 +58,7 @@
 				<div class="fileDrop" >
 				</div>
 				<div style="width:20%;float:right">
-					<input type="file" name="uploadFile" />
+					<input type="file" name="uploadFile" multiple="multiple"/>
 					<br />
 					<button type="button" class="btn btn-primary btn-clock" style="width:76px;" id="uploadImg">사진등록</button>
 				</div>
@@ -68,35 +68,5 @@
 	</div>
 </article>
 </body>
-<!-- <script>
-$(document).ready(function() {
-	  $('#summernote').summernote({
-		  	height: 300,
- 	    	placeholder: "content",
-	        minHeight: null,
-	        maxHeight: null,
-	        focus: true, 
-	        lang : "ko-KR",
-	        /* callbacks: {
-				onImageUpload: function(files, editor, welEditable) {
-		        	sendFile(files[0],editor,welEditable);
-		        }
-			} */
-	  });
-});
-	  function sendFile(file, editor, welEditable) {
-		  var data = new FormData();
-		  data.append("file",file);
-		  $.ajax({
-			  data : data,
-			  type : "post",
-			  url : "/uploadSummernoteImageFile",
-			  contentType : false,
-			  processData : false,
-			  success : function(data) {
-				  $(editor).summernote('editor.insertImage', data.url);
-			  }
-		  })
-	  }
-</script> -->
+
 </html>

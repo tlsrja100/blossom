@@ -18,7 +18,7 @@
 		<label class="join">회원 가입</label>
 	</div>
 	<div class="form-group">
-		<form action="/joinpage" method="post" id="joinpage">
+		<form action="/blossom/joinpage" method="post" id="joinpage">
 			<div class="form-group">
 				<label for="email">이메일</label>
 				<input type="text" class="form-control" id="email" name="email" placeholder="E-mail"/>
@@ -34,7 +34,7 @@
 			<div class="form-group">
 				<label for="password">비밀번호 확인</label>
 				<input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password"/>
-				<small id="confirm_password" class="text-info"></small>
+				<small id="check_password" class="text-info"></small>
 			</div>
 			
 			<div class="form-group">

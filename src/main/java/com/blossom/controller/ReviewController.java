@@ -44,13 +44,15 @@ public class ReviewController {
 		 * dto.getAttachList()) { log.info("attach " + attach); } }
 		 */
 		
+		
+		log.info("attachList" + dto.getAttachList());
 		if (dto.getAttachList() != null) {
 			for (ReviewFileDto attach : dto.getAttachList()) {
 				log.info("attach" + attach);
-				service.reviewInsert(dto);
 			}
 		}
 
+		service.reviewInsert(dto);
 		return "redirect:reviewMain";
 	}
 }
