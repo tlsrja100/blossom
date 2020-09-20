@@ -10,18 +10,6 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
 <link rel="stylesheet" href="/resources/css/login.css" />
 <meta charset="UTF-8">
-<%
-	String msg = (String)request.getAttribute("msg");
-	if(msg == null) {
-		msg = "true";
-	} else {
-		%>
-		<script>
-			alert("아이디 또는 비밀번호를 잘못 입력하셨습니다.");
-		</script>
-		<%
-	}
-%>
 <title>Insert title here</title>
 </head>
 <body>
@@ -103,8 +91,8 @@ function loginbtn() {
 				location.href = "/blossom/mainpage";
 			},
 			error : function(request,status,error){
-				location.href = "/blossom/mainpage";
 				alert("이메일 또는 패스워드를 확인해주세요.");
+				location.href = "/blossom/mainpage";
 				
 			}
 		})

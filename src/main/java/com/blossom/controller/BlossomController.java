@@ -10,8 +10,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -84,12 +86,8 @@ public class BlossomController {
 			session.setAttribute("login", login);
 		} else {
 			session.setAttribute("login", null);
-			rttr.addFlashAttribute("msg", false);
-			model.addAttribute("mm", false);
-			return;
+			rttr.addFlashAttribute("msg", "msg");
 		}
-		 
-	
 	}
 	
 	// 로그아웃
@@ -100,7 +98,25 @@ public class BlossomController {
 		return "redirect:mainpage";
 	}
 	
+	// 회원정보수정
+	@GetMapping("/mypage")
+	public void getmypage() {
+		log.info("mypage");
+	}
 	
+	@PostMapping("mypage")
+	public String postmypage(@ModelAttribute BlossomDto dto, RedirectAttributes rttr, HttpSession session) {
+		String modifyPassword = passwordEncoder.encode(dto.getPassword());
+		dto.setPassword(modifyPassword);
+		if(service.modify(dto) == 1) {
+			service.logout(session);
+			rttr.addFlashAttribute("modify", "modify");
+		}
+		
+		return "redirect:mainpage";
+	}
+	
+	// email check
 	@ResponseBody
 	@PostMapping("/checkEmail")
 	public String checkEmail(String email) {

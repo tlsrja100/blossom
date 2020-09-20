@@ -33,4 +33,14 @@ public class BlossomDao {
 	public BlossomDto getPw(String password) {
 		return sqlSessionTemplate.selectOne("password", password);
 	}
+	
+	// 회원정보
+	public BlossomDto userinfo(String email) {
+		return sqlSessionTemplate.selectOne("userinfo", email);
+	}
+	
+	// 회원정보수정
+	public int modify(BlossomDto dto) {
+		return sqlSessionTemplate.update("modify", dto);
+	}
 }

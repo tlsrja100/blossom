@@ -39,4 +39,14 @@ public class BlossomService {
 		session.invalidate();
 	}
 	
+	// 회원정보
+	public BlossomDto userinfo(String email) {
+		return dao.userinfo(email);
+	}
+	
+	// 회원정보수정
+	public int modify(BlossomDto dto) {
+		return dao.modify(dto);
+	}
+	
 }

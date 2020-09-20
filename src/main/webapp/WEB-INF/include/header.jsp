@@ -102,6 +102,13 @@
 	</ul>
 	<ul>
 		<li>
+			<button type="button" class="buttonstyle" onclick="location.href='/blossom/mypage'">
+				<div class="a">MY PAGE</div>
+			</button>
+		</li>
+	</ul>
+	<ul>
+		<li>
 			<button type="button" class="buttonstyle" onclick="location.href='/board/boardMain'">
 				<div class="a">CUSTOMER CENTER</div>
 			</button>

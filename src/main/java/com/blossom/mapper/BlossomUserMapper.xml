@@ -47,4 +47,24 @@
 		from user_info
 		where password = #{password}
 	</select>
+	
+	<select id="userinfo" resultType="com.blossom.dto.BlossomDto">
+		select password, name, phone, addr1, addr2, addr3
+		from user_info
+		where email = #{email}
+	</select>
+	
+	<!-- 회원정보수정 -->
+	<update id="modify">
+		update user_info 
+		set
+			password = #{password}, 
+			name = #{name},
+			phone = #{phone},
+			addr1 = #{addr1},
+			addr2 = #{addr2},
+			addr3 = #{addr3}
+		where
+			email = #{email}	
+	</update>
 </mapper>
