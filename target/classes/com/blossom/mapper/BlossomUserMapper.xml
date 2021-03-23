@@ -20,8 +20,8 @@
 </resultMap> -->
 	<!-- 회원가입 -->
 	<insert id="insert">
-		insert into user_info (email, password, name, birth, gender, phone, addr1, addr2, addr3)
-		values(#{email}, #{password}, #{name}, #{birth}, #{gender}, #{phone}, #{addr1}, #{addr2}, #{addr3})
+		insert into customer (cno, email, password, name, birth, gender, phone, addr1, addr2, addr3)
+		values(customer_seq.nextval,#{email}, #{password}, #{name}, #{birth}, #{gender}, #{phone}, #{addr1}, #{addr2}, #{addr3})
 	</insert>
 
 	<!-- 중복체크 -->
@@ -29,34 +29,34 @@
 		select
 			email
 		from 
-			user_info 
+			customer 
 		where email = #{email}
 	</select>	
 
 	<!-- 로그인 -->
 	<select id="login" resultType="com.blossom.dto.BlossomDto">
 		select 
-			email, password, name, grade
+			cno, email, password, name, grade
 		from 
-			user_info 
+			customer 
 		where email = #{email}
 	</select>	
 
 	<select id="password" resultType="com.blossom.dto.BlossomDto">
 		select email, password, name
-		from user_info
+		from customer
 		where password = #{password}
 	</select>
 	
 	<select id="userinfo" resultType="com.blossom.dto.BlossomDto">
 		select password, name, phone, addr1, addr2, addr3
-		from user_info
+		from customer
 		where email = #{email}
 	</select>
 	
 	<!-- 회원정보수정 -->
 	<update id="modify">
-		update user_info 
+		update customer 
 		set
 			password = #{password}, 
 			name = #{name},

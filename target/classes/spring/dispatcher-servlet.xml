@@ -25,9 +25,11 @@
 		<property name="maxUploadSize" value="10485760"/>
 	</bean>	
 	
+	
 	<mvc:annotation-driven></mvc:annotation-driven>
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<context:component-scan	base-package="com.blossom.*" />
+	
 
 	<bean id="viewResolver"	class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass"	value="org.springframework.web.servlet.view.JstlView" />

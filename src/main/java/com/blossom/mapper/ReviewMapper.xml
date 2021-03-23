@@ -4,30 +4,79 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="com.blossom.mapper.ReviewMapper">
- 	
- 	<insert id="reviewInsert">
- 		<selectKey keyProperty="num" order="BEFORE" resultType="int">
- 		select blossom_review_seq.nextVal from dual
- 		</selectKey>
- 		insert into blossom_review (num, title, writer, content, regdate)
- 			values (#{num}, #{title}, #{writer}, #{content}, sysdate)
- 	</insert>
- 	
- 	
-	<!-- <insert id="reviewInsert">
-		insert into blossom_review (num, title, writer, content, regdate, uuid, uploadpath, filename, filetype)
-		values (blossom_review_seq.nextVal, #{title}, #{writer}, #{content}, sysdate, #{uuid, jdbcType=VARCHAR}, #{uploadPath, jdbcType=VARCHAR}, #{fileName, jdbcType=VARCHAR}, #{fileType})
-	</insert> -->
- 
- 	<!-- <insert id="reviewInsert">
- 		<![CDATA[
-		INSERT ALL
-			INTO BLOSSOM_REVIEW (num, title, writer, content, regdate)
-				VALUES (#{num}, #{title}, #{writer}, #{content}, SYSDATE)
-			INTO REVIEW_FILE (uuid, uploadPath, fileName, num)
-				VALUES (#{uuid}, #{uploadPath}, #{fileName}, #{num})
-			SELECT * FROM BLOSSOM_REVIEW, REVIEW_FILE
- 			WHERE NUM = #{NUM}
- 		]]>
- 	</insert> -->
+ 	 <resultMap type="com.blossom.dto.ReviewDto" id="Review">
+ 	 	<result column="rno" property="rno"/>
+ 	 	<result column="title" property="title"/>
+ 	 	<result column="writer" property="writer"/>
+ 	 	<result column="content" property="content"/>
+ 	 	<result column="regdate" property="regdate"/>
+ 	 	<result column="readcnt" property="readcnt"/>
+ 	 	<collection property="attachList" resultMap="ReviewFileDto"></collection>
+ 	 </resultMap>
+ 	 
+ 	 <resultMap type="com.blossom.dto.ReviewFileDto" id="ReviewFileDto">
+ 	 	<result column="uuid" property="uuid"/>
+ 	 	<result column="uploadpath" property="uploadPath"/>
+ 	 	<result column="filename" property="fileName"/>
+ 	 	<result column="rno" property="rno"/>
+ 	 </resultMap>
+ 	 
+ 	 
+	<!-- review게시판 insert -->
+	<insert id="InsertSelectKey">
+		<selectKey keyProperty="rno" order="BEFORE" resultType="int">
+			select review_seq.nextval from dual	
+		</selectKey>
+		insert into review (rno, title, writer, content, regdate, readcnt)
+		values (#{rno}, #{title}, #{writer}, #{content}, sysdate, 0)
+	</insert>
+	
+	<!-- review게시판 파일 insert -->
+	<insert id="fileUpload" >
+		insert into review_file (uuid, uploadpath, filename, filetype, rno)
+		values (#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{rno})
+	</insert>
+	
+	<!-- review게시판 list -->
+	<select id="reviewList" resultType="com.blossom.dto.ReviewDto" resultMap="Review">
+	select * from (
+        select rownum as rn,r.rno, r.title, r.writer, r.regdate, r.readcnt, b.uuid, b.uploadpath, b.filename 
+            from review r left join(
+                select * from review_file where rowid in (select min(rowid) from review_file group by rno)
+                order by rno desc
+            )b on r.rno = b.rno
+        )where rn between #{start} and #{end} 
+	</select>
+	
+	<!-- review 게시판 파일 rno -->
+	<select id="findByRno" resultType="com.blossom.dto.ReviewFileDto">
+		<![CDATA[
+		select * from review_file where rno = #{rno} 
+		]]>
+	</select>
+	<!-- review 게시판 detail -->
+	<select id="reviewDetail" resultType="com.blossom.dto.ReviewDto">
+		select * from review where rno = #{rno}
+	</select>
+	<!-- reviewupdate -->
+	<update id="reviewUpdate" parameterType="com.blossom.dto.ReviewDto">
+		update review 
+		set title = #{title},
+			content = #{content}
+		where rno = #{rno}
+	</update>
+	<!-- review file 삭제 -->
+	<delete id="fileDelete">
+		delete from review_file where rno = #{rno}
+	</delete>
+	
+	<select id="reviewCount" resultType="int">
+		select count(*) from review
+	</select>
+
+	<update id="readCnt" >
+		update review
+			set readcnt = readcnt + 1
+		where rno = #{rno}
+	</update>
  </mapper>

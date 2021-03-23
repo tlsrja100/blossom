@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blossom.mapper.DesignerMapper">
+
+	<insert id="designerInsert">
+		insert into designer(dno, designer_name, designer_memo, uuid, uploadPath, fileName, fileType)
+		values (designer_seq.nextval, #{designer_name}, #{designer_memo}, #{uuid, jdbcType=VARCHAR}, #{uploadPath, jdbcType=VARCHAR}, #{fileName, jdbcType=VARCHAR}, #{fileType})
+	</insert>
+	
+	<select id="designerList" resultType="com.blossom.dto.DesignerDto" >
+		select dno, designer_name, designer_memo, uuid, uploadPath, fileName, fileType from designer order by dno asc
+	</select>
+	
+	<select id="designerOne" resultType="com.blossom.dto.DesignerDto">
+		select dno,designer_name from designer where dno = #{dno}
+	</select>
+</mapper>

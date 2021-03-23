@@ -4,8 +4,7 @@
 $(function(){
 	$("#joinpage").validate({
 		errorPlacement:function(error,element){
-			$(element).closest("form").find("small[id='"+element.attr("id")+"']")
-				.append(error);
+			$(element).closest("form").find("small[id='"+element.attr("id")+"']").append(error);
 	},
 
 		rules:{
@@ -30,7 +29,7 @@ $(function(){
 				required: true,
 				validPwd : true
 			},
-			check_password:{
+			confirm_password:{
 				required: true,
 				validPwd : true,
 				equalTo : "#password"
@@ -60,7 +59,7 @@ $(function(){
 				minlength: "최소 8글자는 입력 해야합니다.",
 				maxlength: "최대 15자리 까지 입력 가능합니다."
 			},
-			check_password:{
+			confirm_password:{
 				required: "비밀번호를 확인해 주세요.",
 				minlength: "최소 8글자는 입력 해야합니다.",
 				maxlength: "최대 15자리 까지 입력 가능합니다.",

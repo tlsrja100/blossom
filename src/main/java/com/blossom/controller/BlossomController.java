@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.blossom.dto.BlossomDto;
@@ -25,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/blossom/*")
 @Controller
+
 public class BlossomController {
 	
 	@Autowired
@@ -84,9 +86,13 @@ public class BlossomController {
 
 		if (login != null && passMatch == true) {
 			session.setAttribute("login", login);
+			session.setAttribute("Myname", login.getName());
+			System.out.println("로그인 성공" + login.getName());
 		} else {
 			session.setAttribute("login", null);
+			System.out.println("로그인 실패");
 			rttr.addFlashAttribute("msg", "msg");
+			rttr.addFlashAttribute("ff", false);
 		}
 	}
 	

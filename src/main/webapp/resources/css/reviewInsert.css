@@ -1,0 +1,35 @@
+.wrap {
+	width:800px;
+	height: 800px;
+	margin: auto;
+	margin-top : 60px;
+}
+.fileDrop {
+	width: 100%;
+	height : 200px;
+	/* border : 1px solid black; */
+	margin-top : 10px;
+}
+.mb-3 {
+	margin-top : 8px;
+}
+.panel-default {
+	margin-top : 30px;
+}
+.fileDrop ul li {
+	float: left;
+	margin-right : 10px;
+	list-style : none;
+}
+.file_Btn {
+	float : left;
+	margin-top : 10px;
+}
+.submitBtn {
+	text-align:right;
+	margin-top:20px;
+}
+.file_Upload {
+	float:right;
+	margin:10px 0;
+}

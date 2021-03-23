@@ -5,7 +5,7 @@ import java.util.Date;
 
 
 public class BlossomDto {
-	
+	private int cno;
 	private String email;
 	private String password;
 	private String name;
@@ -17,8 +17,12 @@ public class BlossomDto {
 	private String addr3;
 	private Date regDate;
 	private int grade;
-	
-	
+	public int getCno() {
+		return cno;
+	}
+	public void setCno(int cno) {
+		this.cno = cno;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -87,13 +91,18 @@ public class BlossomDto {
 	}
 	@Override
 	public String toString() {
-		return "BlossomDto [email=" + email + ", password=" + password + ", name=" + name + ", birth=" + birth
-				+ ", gender=" + gender + ", phone=" + phone + ", addr1=" + addr1 + ", addr2=" + addr2 + ", addr3="
-				+ addr3 + ", regDate=" + regDate + ", grade=" + grade + "]";
+		return "BlossomDto [cno=" + cno + ", email=" + email + ", password=" + password + ", name=" + name + ", birth="
+				+ birth + ", gender=" + gender + ", phone=" + phone + ", addr1=" + addr1 + ", addr2=" + addr2
+				+ ", addr3=" + addr3 + ", regDate=" + regDate + ", grade=" + grade + ", getCno()=" + getCno()
+				+ ", getEmail()=" + getEmail() + ", getPassword()=" + getPassword() + ", getName()=" + getName()
+				+ ", getBirth()=" + getBirth() + ", getGender()=" + getGender() + ", getPhone()=" + getPhone()
+				+ ", getAddr1()=" + getAddr1() + ", getAddr2()=" + getAddr2() + ", getAddr3()=" + getAddr3()
+				+ ", getRegDate()=" + getRegDate() + ", getGrade()=" + getGrade() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 	
 	
-
+	
 	
 	
 }

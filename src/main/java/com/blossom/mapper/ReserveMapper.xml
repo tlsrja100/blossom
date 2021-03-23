@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blossom.mapper.ReserveMapper">
+
+	<resultMap type="com.blossom.dto.ReserveDto" id="Reserve">
+		<result column="rno" property="rno"/>
+		<result column="day" property="day"/>
+		<result column="time" property="time"/>
+
+<!-- 		<collection property="designer" resultMap="designer" /> -->
+	</resultMap>	
+	<resultMap type="com.blossom.dto.DesignerDto" id="designer">
+		<result column="dno" property="dno"/>
+		<result column="designer_name" property="designer_name"/>
+	</resultMap>
+
+	
+	
+	<select id="timeList" parameterType="com.blossom.dto.ReserveDto" resultMap="Reserve">
+		select r.rno, r.day, r.time, d.dno, d.designer_name
+		from reserve r, designer d
+		where r.dno_seq = d.dno 
+		and r.day = #{day}
+		and d.dno = #{dno}
+	</select>
+	
+	<insert id="reserveInsert">
+		insert into reserve (rno, day, time, dno_seq, cno_seq)
+		values (reserve_seq.nextVal, #{day}, #{time}, #{dno_seq}, #{cno_seq})
+	</insert>
+	
+</mapper>

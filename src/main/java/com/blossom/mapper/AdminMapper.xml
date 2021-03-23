@@ -10,7 +10,7 @@
 		select * from (
 			select rownum as rn, a.* from (
 				select rownum, email, name, birth, phone, addr1, addr2, addr3 
-					from user_info
+					from customer
 					<include refid="search"></include>
 					order by name desc
 			) a
@@ -20,7 +20,7 @@
 
 	<!-- 회원 카운트 -->
 	<select id="MemberCount" resultType="int">
-		select count(*) from user_info
+		select count(*) from customer
 		<include refid="search"></include>
 	</select>
 

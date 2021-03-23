@@ -1,0 +1,41 @@
+.wrap {
+	width:800px;
+	height: 800px;
+	margin: auto;
+}
+.insertDiv {
+	margin-top : 10px;
+	height: 50px;
+}
+ul {
+	list-style:none;
+}
+.review_li {
+	float: left;
+	padding : 20px 15px;
+	margin-left : 25px;
+} 
+
+.img {
+	border: 1px solid #e7e9e8;
+	width: 200px;
+	height: 200px;
+}
+.review_date {
+	float:right;
+	margin-right:5px;
+	margin-top : 2px;
+}
+.review_box {
+	border : 1px solid #ccc;
+	background : #fff;
+	border-radius : 0 0 2px 2px;
+}
+
+.review_title, .review_writer, .fa {
+	margin : 5px;
+}
+
+.review_info {
+	background : #f6f6f6;
+}

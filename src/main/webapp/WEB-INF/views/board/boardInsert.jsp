@@ -8,17 +8,18 @@
 <title>Insert title here</title>
 </head>
 <style>
-.container{
- padding-top: 70px;
- padding-bottom: 30px;
+.wrap{
+	width:800px;
+	height:800px;
+	margin:auto;
+	margin-top : 60px;
 }
 .mb-3 {
 	padding-top : 20px;
 }
 </style>
 <body>
-<article>
-	<div class="container">
+	<div class="wrap">
 		<form id="insertForm">
 			<div class="mb-3">	
 				<label for="title">제목</label>
@@ -30,15 +31,14 @@
 			</div>
 			<div class="mb-3">
 				<label for="content">글내용</label>
-				<textarea class="form-control" rows="4" name="content" id="content" placeholder="내용을 입력해주세요." ></textarea>
+				<textarea style="resize:none;height:300px;" class="form-control" rows="4" name="content" id="content" placeholder="내용을 입력해주세요." ></textarea>
 			</div>
 		</form>
 		<br />
 			<div>
-				<button type="button" class="btn btn-primary" onclick="insertbtn()">등록</button>
+				<button style="float:right" type="button" class="btn btn-primary" onclick="insertbtn()">등록</button>
 			</div>
 	</div>
-</article>
 </body>
 <script>
 function insertbtn() {

@@ -10,7 +10,6 @@
 </head>
 <style>
 .container{
-	 padding-top: 70px;
 	 padding-bottom: 30px;
 }
 .mb-3 {
@@ -19,7 +18,7 @@
 </style>
 <body>
 <article>
-	<div class="container">
+	<div class="container" style="width:800px;">
 		<c:choose>
 			<c:when test="${login.grade == 9}">
 			<form id="modifyForm">

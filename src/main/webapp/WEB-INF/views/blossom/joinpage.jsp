@@ -34,7 +34,7 @@
 			<div class="form-group">
 				<label for="password">비밀번호 확인</label>
 				<input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password"/>
-				<small id="check_password" class="text-info"></small>
+				<small id="confirm_password" class="text-info"></small>
 			</div>
 			
 			<div class="form-group">

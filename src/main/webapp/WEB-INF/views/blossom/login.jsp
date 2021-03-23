@@ -54,12 +54,12 @@
 							<button type="button" class="btn btn-sm animated-button thar-two" style="width:100px; height:30px; margin-left:45px;text-align:center;" onclick="loginbtn()">Login</button> 
 					</div>
 				</form>
-				<c:if test="${mm == false }">
+				<%-- <c:if test="${ff == false }">
 				<script>
 					alert("a");
 				</script>
 						<!-- <p style="color:#f00;">로그인에 실패했습니다.</p> -->
-				</c:if>
+				</c:if> --%>
 			</div>
 		</div>
 	</div>
@@ -90,14 +90,12 @@ function loginbtn() {
 				console.log(login);
 				location.href = "/blossom/mainpage";
 			},
-			error : function(request,status,error){
+			error : function(data){
 				alert("이메일 또는 패스워드를 확인해주세요.");
 				location.href = "/blossom/mainpage";
-				
 			}
 		})
-	} 
+	}
 }
-
 </script>
 </html>

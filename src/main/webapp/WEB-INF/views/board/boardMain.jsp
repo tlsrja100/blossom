@@ -7,7 +7,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="../../include/header.jsp"%>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지사항</title>
 </head>
 <body>
 <br />
@@ -35,6 +35,7 @@
 					</tr>
 				</c:forEach>
 			</table>
+			<input type="hidden" name="boardnum" value="${dto.num }" />
 			<span style="text-align:left;">${map.count }개의 게시물이 있습니다.</span>
 			
 			<!-- 검색 -->
